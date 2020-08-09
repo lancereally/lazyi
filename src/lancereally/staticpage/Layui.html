@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="layui/css/layui.css">
+<script src="layui/layui.js"></script>
+<script src="js/jquery-3.4.1.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+        $(".layui-progress-big").click(function () {
+            element.progress('demo', '50%')
+        })
+        //…
+    });
+
+    //表单
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+//轮播
+    layui.use('carousel', function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            ,width: '80%' //设置容器宽度
+            ,arrow: 'always' //始终显示箭头
+            ,anim: 'updown' //切换动画方式
+        });
+    });
+    $(function () {
+        $(".layui-nav-item").click(function () {
+            $(this).addClass("layui-this");
+        })
+
+
+    })
+</script>
+<body>
+<div class="layui-container" style="">
+    <ul class="layui-nav" lay-filter="">
+        <li class="layui-nav-item"><a href="">最新安排</a>
+            <dl class="layui-nav-child">
+                <dd><a href="">就这？</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">下周</a></li>
+        <li class="layui-nav-item"><a href="">前端</a></li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">考核</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <dd><a href="">就这？</a></dd>
+                <dd><a href="">就这？</a></dd>
+                <dd><a href="">就这？</a></dd>
+            </dl>
+        </li>
+<!--        <img src="img/1.jpg" class="layui-nav-bar" alt="">-->
+        <li class="layui-nav-item"><a href="">fight！</a></li>
+    </ul>
+    <hr>
+    <div class="layui-carousel" id="test1" style="margin: 0 auto">
+        <div carousel-item style="">
+            <div style="background-color: darkcyan">条目1</div>
+            <div style="background-color: darkcyan">条目2</div>
+            <div style="background-color: darkcyan">条目3</div>
+            <div style="background-color: darkcyan">条目4</div>
+            <div style="background-color: darkcyan">条目5</div>
+        </div>
+    </div>
+<!--    表单-->
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">输入框</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码框</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">好起来了</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择框</label>
+            <div class="layui-input-block">
+                <select name="city" lay-verify="required">
+                    <option value=""></option>
+                    <option value="0">北</option>
+                    <option value="1">上</option>
+                    <option value="2">广</option>
+                    <option value="3">深</option>
+                    <option value="4">济</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">复选框</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="like[write]" title="上班">
+                <input type="checkbox" name="like[read]" title="下班" checked>
+                <input type="checkbox" name="like[dai]" title="上下班">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">私密</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="switch" lay-skin="switch">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">单选框</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="男" title="男">
+                <input type="radio" name="sex" value="女" title="女" checked>
+                <input type="radio" name="sex" value="私密" title="私密">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">文本域</label>
+            <div class="layui-input-block">
+                <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+<!--        进度条-->
+        <hr>
+        <div class="layui-progress layui-progress-big" lay-showPercent="true" lay-filter="demo">
+            <div class="layui-progress-bar layui-bg-blue" lay-percent="80%"></div>
+        </div>
+        <hr>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+    <hr class="layui-bg-cyan">
+<!--    按钮-->
+    <div class="layui-btn-container">
+        <button type="button" class="layui-btn layui-btn-warm layui-anim layui-anim-rotate layui-anim-loop">啊这</button>
+        <button type="button" class="layui-btn layui-btn-danger layui-anim layui-anim-rotate layui-anim-loop">就这</button>
+        <button type="submit" class="layui-btn layui-btn-checked layui-anim layui-anim-rotate layui-anim-loop">哦这</button>
+        <button type="submit" class="layui-btn layui-btn-radius layui-bg-cyan layui-anim layui-anim-rotate layui-anim-loop">可这</button>
+        <button type="submit" class="layui-btn layui-btn-normal layui-anim layui-anim-rotate layui-anim-loop">呀这</button>
+        <button type="submit" class="layui-btn layui-btn-disabled layui-anim layui-anim-rotate layui-anim-loop">哟这</button>
+        <button type="reset" class="layui-btn layui-btn-fluid">呃这</button>
+
+    </div>
+</div>
+</body>
+</html>

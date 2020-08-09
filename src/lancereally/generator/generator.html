@@ -1,0 +1,72 @@
+    <!-- 正文开始 -->
+<!-- 表单弹窗 -->
+<!--<script type="text/html" id="showFields">-->
+<!--    <table class="layui-table" id="fieldTable" lay-filter="fieldTable"></table>-->
+<!--    <div class="layui-form-item text-right">-->
+<!--        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>-->
+<!--        <button class="layui-btn" lay-filter="sessionGo" lay-submit>保存</button>-->
+<!--    </div>-->
+<!--</script>-->
+
+<form id="tableForm" lay-filter="tableForm" class="layui-form model-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">作者名称</label>
+        <div class="layui-input-block">
+            <input name="authorName" placeholder="请输入作者名称" type="text" class="layui-input" maxlength="20"
+                   lay-verType="tips" lay-verify="required" value="" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">项目包名称</label>
+        <div class="layui-input-block">
+            <input name="path" placeholder="请输入包名称" type="text" class="layui-input" maxlength="20"
+                   lay-verType="tips" lay-verify="required" value="" required/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据源选择</label>
+        <div class="layui-input-block">
+            <select type='select' name="dbSource" id="dbSource" lay-verify="" lay-filter="dbSourceOption">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择表</label>
+        <div class="layui-input-block" id="row">
+            <table class="layui-table" id="bookTable" lay-filter="Tables"></table>
+        </div>
+        <script type="text/html" id="tableBarRole">
+            <p></p>
+            <a class="layui-btn layui-btn-primary layui-btn-xs layui-bg-blue" lay-event="edit" style="display: none">字段配置</a>
+        </script>
+    </div>
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="reset" lay-filter="dataEmpty" id="dataEmpty">重置</button>
+        <button class="layui-btn" lay-filter="codeSubmit" lay-submit>生成代码</button>
+    </div>
+</form>
+<script type="text/html" id="fieldCheck">
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="margin-left:-11px">
+            <input type="checkbox" name="queryStatus" lay-skin="primary">
+        </div>
+    </div>                <!--                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+</script>
+<script type="text/html" id="fieldSelect">
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <select name="" id="f-select" lay-filter="f-select">
+                {{# d.inputTypeList.forEach(function(e) { }}
+                {{# if(d.inputType === e.value) {         }}
+                <option value="{{e.value}}" style="margin: -5px 0" selected>{{e.name}}</option>
+                {{# } else {                              }}
+                <option value="{{e.value}}" style="margin: -5px 0">{{e.name}}</option>
+                {{# }                                     }}
+                {{# });                                   }}
+            </select>
+        </div>
+    </div>
+</script>
+<!-- js部分 -->
+<script type="text/javascript" src="/components/modular/generator/js/generator.js"></script>
